@@ -13,7 +13,7 @@ async function loadCars() {
             const row = document.createElement('tr');
             row.innerHTML = `
             <td>${car.id}</td>
-            <td>${imageUrl ? `<a href="${imageUrl}" data-lightbox="image-set"><img src="${imageUrl}" alt="Car Image" class="img image-thumbnail" style="width: 100px; height: auto;"></a>` : 'N/A'}</td>
+            <td>${imageUrl ? `<a href="${imageUrl}" data-lightbox="image-set"><img src="${imageUrl}" alt="Car Image" class="img img-thumbnail" style="width: 100px; height: auto;"></a>` : 'N/A'}</td>
             <td>${car.factory}</td>
             <td>${car.model}</td>
             <td>${car.year}</td>
