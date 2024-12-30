@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="lightbox2/css/lightbox2.css">
     <title>Cars Database - REST Demo</title>
+    <style>
+       th,td {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,15 +61,16 @@
             <div class="col-md-8">
                 <table class="table table-bordered table-striped table-sm table-hover">
                     <thead class="table-dark">
-                        <th>#</th>
+                        <th class="text-center"><a href="#nogo" onclick="loadCars('id')">#</a></th>
                         <th>Kép</th>
-                        <th>Gyártó</th>
-                        <th>Modell</th>
-                        <th>Évjárat</th>
-                        <th>Tulajdonos</th>
-                        <th>Rendszám</th>
+                        <th><a href="#nogo" onclick="loadCars('factory')">Gyártó</a></th>
+                        <th><a href="#nogo" onclick="loadCars('model')">Modell</a></th>
+                        <th><a href="#nogo" onclick="loadCars('year')">Évjárat</a></th>
+                        <th><a href="#nogo" onclick="loadCars('owner')">Tulajdonos</a></th>
+                        <th><a href="#nogo" onclick="loadCars('license')">Rendszám</a></th>
                         <th>Műveletek</th>
                     </thead>
+                    <button class="btn btn-secondary mb-3" onclick="loadCars()">Alaphelyzet</button>
                     <tbody id="carTable">
                         <!--Ide generáljuk a táblázat sorait.-->
                     </tbody>

@@ -115,9 +115,20 @@ app.post('/api/v1/cars', upload.single('image'), (req, res) => {
 
 //Teljes adatbázis lekéráse
 app.get('/api/v1/cars', (req, res) => {
-    db.all(`SELECT * FROM cars`, [], (err, rows) => {
-        if (err) return res.status(500).send(err.message);
-        res.send(rows)
+    const sortBy = req.query.sortBy || 'id';// Alapértelmezett: id szerint rendez
+    const validColumns = ['id', 'imagefile', 'factory', 'model', 'year', 'owner', 'license'];
+
+    if (!validColumns.includes(sortBy)) {
+        res.status(400).send({ error: 'A rendezés nem sikerült!' });
+        return;
+    }
+
+    db.all(`SELECT * FROM cars ORDER BY ${sortBy} COLLATE NOCASE`, [], (err, rows) => {
+        if (err) {
+            res.status(500).send(err.message);
+            return;
+        }
+        res.status(200).json(rows);
     });
 });
 

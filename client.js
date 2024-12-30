@@ -1,9 +1,10 @@
 const apiUrl = 'http://localhost:3000/api/v1/cars';
 
 //Autók adatainak a betöltése a táblázat soraiba
-async function loadCars() {
+async function loadCars(sortBy = '') {
     try {
-        const response = await fetch(apiUrl);
+        const url = sortBy ? `${apiUrl}?sortBy=${sortBy}` : apiUrl;
+        const response = await fetch(url);
         const cars = await response.json();
 
         const table = document.getElementById('carTable');
@@ -12,7 +13,7 @@ async function loadCars() {
             const imageUrl = car.imagefile ? `http://localhost:3000/uploads/${car.imagefile}` : '';
             const row = document.createElement('tr');
             row.innerHTML = `
-            <td>${car.id}</td>
+            <td class="text-center">${car.id}</td>
             <td>${imageUrl ? `<a href="${imageUrl}" data-lightbox="image-set"><img src="${imageUrl}" alt="Car Image" class="img img-thumbnail" style="width: 100px; height: auto;"></a>` : 'N/A'}</td>
             <td>${car.factory}</td>
             <td>${car.model}</td>
@@ -134,4 +135,6 @@ async function deleteCar(id) {
 
 
 //Az oldal betöltődésekor töltse fel adatokkal a táblázatot.
-document.addEventListener('DOMContentLoaded', loadCars);
+window.onload = function() {
+    loadCars();
+};
